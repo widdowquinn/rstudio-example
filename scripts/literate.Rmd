@@ -3,7 +3,10 @@ title: "Life Expectancies"
 author: "Leighton Pritchard"
 date: "12/01/2018"
 output:
-  html_document: default
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
   word_document: default
 ---
 
@@ -39,3 +42,14 @@ p <- ggplot(data=gapminder, aes(x=year, y=gdpPercap, color=continent, group=coun
 p + geom_line() + scale_y_log10() + facet_wrap(~continent)
 ```
 
+### GDP per capita vs population
+
+We visualise GDP per capita against population, by continent.
+
+```{r capita}
+p <- ggplot(data=gapminder, aes(x=pop, y=gdpPercap))
+p <- p + geom_point(aes(color=continent), alpha=0.8)
+p <- p + scale_y_log10() + scale_x_log10()
+p <- p + geom_density_2d(alpha=0.5)
+p + facet_wrap(~year)
+```
