@@ -1,0 +1,41 @@
+---
+title: "Life Expectancies"
+author: "Leighton Pritchard"
+date: "12/01/2018"
+output:
+  html_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Import library
+library(ggplot2)
+
+# Load gapminder data
+gapminder <- read.table("https://raw.githubusercontent.com/resbaz/r-novice-gapminder-files/master/data/gapminder-FiveYearData.csv" , sep=",", header=TRUE)
+```
+
+## Introduction
+
+We are going to present some results for life expenctancy and GDP for various nations.
+
+### Life Expectancy by Continent
+
+We examined life expectancy by continent and nation.
+
+```{r lifexp}
+p <- ggplot(data=gapminder, aes(x=year, y=lifeExp, color=continent, group=country))
+p + geom_line() + scale_y_log10() + facet_wrap(~continent)
+```
+
+### GDP by Continent
+
+We examined GDP by continent and nation.
+
+```{r gdp, echo=FALSE}
+p <- ggplot(data=gapminder, aes(x=year, y=gdpPercap, color=continent, group=country))
+p + geom_line() + scale_y_log10() + facet_wrap(~continent)
+```
+
